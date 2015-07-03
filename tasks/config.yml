@@ -1,0 +1,19 @@
+---
+
+- name: config - config file
+  template:
+    src=newrelic_plugin.yml.j2
+    dest={{ newrelic_cloudwatch_install_dir }}/current/config/newrelic_plugin.yml
+
+- name: config - dir
+  file:
+    state=link
+    src={{ newrelic_cloudwatch_install_dir }}/current/config/
+    dest={{ newrelic_cloudwatch_config_dir }}
+    force=yes
+
+- name: config - log dir
+  file:
+    state=directory
+    path={{ newrelic_cloudwatch_log_dir }}
+    mode=0755

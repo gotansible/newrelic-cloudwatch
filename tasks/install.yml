@@ -1,0 +1,37 @@
+---
+
+- name: install - directories
+  file:
+    state=directory
+    path={{ item }}
+  with_items:
+    - "{{ newrelic_cloudwatch_install_dir }}"
+    - "{{ newrelic_cloudwatch_cache_dir }}"
+
+- name: install - download
+  get_url:
+    url={{ newrelic_cloudwatch_url}} 
+    dest={{ newrelic_cloudwatch_cache_dir }}
+
+- name: install - unarchive
+  unarchive:
+    src={{ newrelic_cloudwatch_cache_dir }}/{{ newrelic_cloudwatch_archive }}
+    dest={{ newrelic_cloudwatch_install_dir }}/
+    copy=no
+
+- name: install - build
+  shell: bundle install
+  args:
+    chdir: "{{ newrelic_cloudwatch_install_dir }}/{{ newrelic_cloudwatch_archive | replace('.tar.gz', '') }}"
+
+- name: install - link current
+  file:
+    state=link
+    dest={{ newrelic_cloudwatch_install_dir }}/current
+    src={{ newrelic_cloudwatch_install_dir }}/{{ newrelic_cloudwatch_archive | replace('.tar.gz', '') }}
+
+- name: install - run file
+  template:
+    src=run.sh.j2
+    dest={{ newrelic_cloudwatch_install_dir }}/current/run.sh
+    mode=0755

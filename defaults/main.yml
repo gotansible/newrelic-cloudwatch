@@ -1,0 +1,21 @@
+---
+
+newrelic_cloudwatch_archive: newrelic_aws_cloudwatch_plugin-3.3.2.tar.gz
+newrelic_cloudwatch_url: "https://github.com/newrelic-platform/newrelic_aws_cloudwatch_plugin/archive/3.3.2.tar.gz"
+newrelic_cloudwatch_cache_dir: /var/ansible/newrelic-cloudwatch
+newrelic_cloudwatch_install_dir: /opt/newrelic-cloudwatch
+newrelic_cloudwatch_config_dir: /etc/newrelic-cloudwatch
+newrelic_cloudwatch_log_dir: /var/log/newrelic-cloudwatch
+
+newrelic_cloudwatch_newrelic_key: the_newrelic_key
+newrelic_cloudwatch_aws_access_key: key
+newrelic_cloudwatch_aws_secret_key: secretkey
+
+newrelic_ec2_enabled: true
+newrelic_ebs_enabled: true
+newrelic_elb_enabled: true
+newrelic_rds_enabled: true
+newrelic_sqs_enabled: false
+newrelic_sns_enabled: false
+newrelic_ec_enabled: true
+newrelic_ecr_enabled: false

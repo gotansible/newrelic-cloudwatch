@@ -1,0 +1,12 @@
+---
+
+- name: service - setup and run 
+  runit:
+    name: newrelic-cloudwatch
+    enabled: true
+    state: start
+    timeout: 7
+    user: root
+    command: "{{ newrelic_cloudwatch_install_dir }}/current/run.sh"
+  register: redis_service_status
+

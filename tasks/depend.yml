@@ -1,0 +1,21 @@
+---
+
+- name: depend - packages
+  apt:
+    name={{ item }}
+    state=present
+    update_cache=yes
+  with_items:
+    - ruby
+    - git
+    - rubygems
+    - libxslt-dev 
+    - libxml2-dev
+    - build-essential
+  when: ansible_os_family == "Debian"
+
+- name: depend - gems
+  gem:
+    name=bundler
+    state=latest
+    user_install=no

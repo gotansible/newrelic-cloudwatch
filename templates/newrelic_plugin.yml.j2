@@ -1,0 +1,62 @@
+---
+# Please make sure to update the license_key information with the
+# license key for your New Relic account.
+#
+newrelic:
+  #
+  # Update with your New Relic account license key:
+  #
+  license_key: '{{ newrelic_cloudwatch_newrelic_key }}'
+  #
+  # Set to '1' for verbose output, remove for normal output.
+  # All output goes to stdout/stderr.
+  #
+  # verbose: 1
+#
+# AWS configuration.
+#
+aws:
+  # Update with you AWS account keys:
+  access_key: '{{ newrelic_cloudwatch_aws_access_key }}'
+  secret_key: '{{ newrelic_cloudwatch_aws_secret_key }}'
+
+  #Use the following if you would like to configure AWS keys with ENV variables
+  #access_key: <%= ENV['AWS_ACCESS_KEY'] %>
+  #secret_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+
+  #Use the following line disable the key checks and enable usage of AWS instance metadata for setting keys
+  #use_aws_metadata: true
+
+  # Specify AWS regions to query for metrics
+  # regions:
+  #   us-east-1
+#
+# Agent configuration.
+#
+agents:
+  #
+  # Enable/disable agents with the enabled attribute or by commenting out each agent.
+  #
+  # Tag and instance ID filtering are available and are documented at
+  # https://github.com/newrelic-platform/newrelic_aws_cloudwatch_plugin/blob/master/README.md#tag-filtering
+  #
+  # An optional cloudwatch_delay attribute can be added for each agent
+  # which adjusts the time window in seconds for CloudWatch querying.
+  # Some of the Cloudwatch metrics are not immediately available and may
+  # require a delay before being queried.
+  ec2:
+    enabled: {{ newrelic_ec2_enabled | to_nice_json }}
+  ebs:
+    enabled: {{ newrelic_ebs_enabled | to_nice_json }}
+  elb:
+    enabled: {{ newrelic_elb_enabled | to_nice_json }}
+  rds:
+    enabled: {{ newrelic_rds_enabled | to_nice_json }}
+  sqs:
+    enabled: {{ newrelic_sqs_enabled | to_nice_json }}
+  sns:
+    enabled: {{ newrelic_sns_enabled | to_nice_json }}
+  ec:
+    enabled: {{ newrelic_ec_enabled | to_nice_json }}
+  ecr:
+    enabled: {{ newrelic_ecr_enabled | to_nice_json }}
